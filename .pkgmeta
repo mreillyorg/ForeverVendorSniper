@@ -1,0 +1,9 @@
+package-as: ForeverVendorSniper
+ignore:
+  - .github
+  - .luacheckrc
+  - tests
+  - tools
+  - README.md
+  - .gitignore
+  - .pkgmeta

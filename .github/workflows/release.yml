@@ -1,0 +1,27 @@
+name: Package release
+on:
+  push:
+    tags: ['v*']
+  workflow_dispatch:
+jobs:
+  quality:
+    uses: ./.github/workflows/quality.yml
+  package:
+    needs: quality
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: BigWigs Packager (dry run, no publication)
+        uses: BigWigsMods/packager@v2.6.1
+        with:
+          args: -d
+      - name: Validate release structure
+        shell: bash
+        run: |
+          python3 tools/check_release.py
+      - uses: actions/upload-artifact@v4
+        with:
+          name: ForeverVendorSniper-package
+          path: .release/*.zip
