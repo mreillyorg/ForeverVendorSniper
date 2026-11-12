@@ -24,3 +24,14 @@ Run `python tools/check_lua_quality.py --lua /path/to/lua5.1 --luac /path/to/lua
 
 ## Packaging
 BigWigsMods/packager uses `.pkgmeta` and `package-as` to produce one top-level `ForeverVendorSniper/` folder. Configure CurseForge project ID in the TOC and `CF_API_KEY` GitHub secret before publishing. Publishing is disabled until live integration is tested.
+
+## Custom themes (alpha)
+The in-game theme editor is currently command-based:
+- `/fvs theme create Ocean` duplicates the current theme and selects it.
+- `/fvs theme color Ocean accent #55AADD` sets one color. Supported fields: `background`, `panel`, `accent`, `text`, `profit`.
+- `/fvs theme select Dark` selects a built-in or saved custom theme.
+- `/fvs theme delete Ocean` removes a custom theme.
+Custom themes persist in SavedVariables. A graphical color picker remains planned.
+
+## Scanner notes
+The native scanner currently requires clicking **Next Page** between pages, honors query cooldowns and does not purchase auctions. Auctionator and TSM are detected but are not yet integrated as live listing providers. Forever AH API verification is still required.
