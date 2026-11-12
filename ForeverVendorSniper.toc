@@ -6,6 +6,7 @@
 ## SavedVariables: ForeverVendorSniperDB
 Core.lua
 Themes.lua
+ThemeEditor.lua
 Opportunities.lua
 Sources.lua
 VendorPrices.lua

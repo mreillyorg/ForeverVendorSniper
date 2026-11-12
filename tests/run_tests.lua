@@ -41,4 +41,40 @@ eq(ns.SetMinimumProfit(-1),false,"invalid threshold")
 eq(ns.SetMinimumProfit(250),true,"valid threshold")
 eq(ns.db.minProfit,250,"saved threshold")
 eq(ns.SetMinimumDiscount(101),false,"invalid discount")
+dofile("ThemeEditor.lua")
+eq(ns.CreateTheme("Ocean", "Dark"), true, "create custom theme")
+eq(ns.db.theme, "Ocean", "activate custom theme")
+eq(ns.SetThemeColor("Ocean", "accent", "#abcdef"), true, "set custom color")
+eq(ns.GetTheme("Ocean").accent, "ABCDEF", "normalized color")
+eq(ns.SetThemeColor("Ocean", "unknown", "123456"), false, "invalid theme field")
+eq(ns.CreateTheme("Dark"), false, "reject built-in theme")
+eq(ns.SelectTheme("missing"), false, "reject unknown theme")
+eq(ns.ThemeCommand("select Light"), true, "theme chat command")
+eq(ns.DeleteTheme("Ocean"), true, "delete custom theme")
+-- Mock a two-page native scan and verify that results survive pagination.
+dofile("Scanner.lua")
+ns.auctionOpen = true
+ns.db.minProfit = 0
+ns.db.minDiscount = 0
+ns.GetVendorUnit = function() return 100 end
+local page, queries = 0, 0
+QueryAuctionItems = function(_, _, _, p) page = p queries = queries + 1 end
+CanSendAuctionQuery = function() return true end
+GetNumAuctionItems = function()
+    if page == 0 then return 50, 51 end
+    return 1, 51
+end
+GetAuctionItemInfo = function(_, index)
+    return "Item" .. index, nil, 1, nil, nil, nil, nil, 0, 0, 50, 0
+end
+GetAuctionItemLink = function(_, index) return "item:" .. index end
+eq(ns.StartScan(), true, "start native scan")
+ns.ProcessPage()
+eq(#ns.results, 50, "first page candidates")
+eq(ns.scan.nextPage, 1, "next page queued")
+eq(ns.NextPage(), true, "advance page")
+ns.ProcessPage()
+eq(#ns.results, 51, "second page candidates")
+eq(ns.scan.active, false, "scan complete")
+eq(queries, 2, "query count")
 print("PASS: " .. checks .. " assertions")

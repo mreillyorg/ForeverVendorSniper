@@ -38,6 +38,7 @@ end
 function ns.BuildUI()
     if frame then return end
     frame = CreateFrame("Frame", "ForeverVendorSniperPanel", UIParent)
+    ns.panel = frame
     frame:SetSize(690, 360)
     frame:SetFrameStrata("DIALOG")
     frame:SetMovable(true)
