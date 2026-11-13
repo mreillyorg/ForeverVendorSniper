@@ -19,6 +19,16 @@ Experimental WoW Forever (1.60.1 / Lua 5.1) Auction House vendor-arbitrage addon
 - No automatic scan continuation, bid opportunities, custom theme editor or import/export yet.
 - UI resizability and confirmation/purchase workflow are pending.
 
+## Live Auction House API diagnostics
+While logged in, run `/fvs debug api`. The command enumerates only function names
+from `C_AuctionHouse` (it sends **no** auction queries and makes no purchases).
+Log out normally to write SavedVariables, then inspect:
+`_forever_/WTF/Account/<account>/SavedVariables/ForeverVendorSniper.lua`.
+Look for `apiDiagnostics.methods` in `ForeverVendorSniperDB`; it is an alphabetically
+sorted list, with `count` and schema `version`. The command overwrites the previous
+snapshot on each successful capture. If the AH API is unavailable, it reports an
+error and leaves the previous snapshot untouched.
+
 ## Testing
 Run `python tools/check_lua_quality.py --lua /path/to/lua5.1 --luac /path/to/luac5.1 --luacheck /path/to/luacheck`.
 

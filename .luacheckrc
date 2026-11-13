@@ -2,7 +2,7 @@ std = "lua51"
 max_line_length = 140
 -- Addon-owned namespace and SavedVariables are intentionally mutable.
 globals = {
-  "ForeverVendorSniper", "ForeverVendorSniperDB",
+  "ForeverVendorSniper", "ForeverVendorSniperDB", "C_AuctionHouse",
   "SLASH_FOREVERVENDORSNIPER1", "SlashCmdList",
   -- The unit-test harness replaces these WoW AH API functions with mocks.
   "CanSendAuctionQuery", "QueryAuctionItems",

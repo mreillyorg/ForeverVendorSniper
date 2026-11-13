@@ -5,6 +5,9 @@
 - Add vendor arbitrage calculations, movable companion panel, and three themes.
 - Add fail-closed purchase validation, unit tests, and release packaging configuration.
 
+- Add `/fvs debug api` to persist a sorted C_AuctionHouse function inventory.
+- Correct the TOC interface metadata to WoW Forever 16001.
+
 ### Development continuation
 - Added custom-theme creation, selection, editing and deletion through `/fvs theme` commands.
 - Improved scan pagination, query-error handling and throttling recovery.

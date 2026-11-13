@@ -78,4 +78,25 @@ ns.ProcessPage()
 eq(#ns.results, 51, "second page candidates")
 eq(ns.scan.active, false, "scan complete")
 eq(queries, 2, "query count")
+-- Debug capture is deterministic, sorted and does not invoke auction methods.
+dofile("Diagnostics.lua")
+local calls = 0
+C_AuctionHouse = {
+    SendBrowseQuery = function() calls = calls + 1 end,
+    GetBrowseItems = function() calls = calls + 1 end,
+    NonFunction = true,
+}
+local ok, message = ns.DebugCommand("api")
+eq(ok, true, "API capture succeeds")
+eq(ns.db.apiDiagnostics.count, 2, "only functions captured")
+eq(ns.db.apiDiagnostics.methods[1], "GetBrowseItems", "methods sorted")
+eq(ns.db.apiDiagnostics.methods[2], "SendBrowseQuery", "second method")
+eq(calls, 0, "diagnostic is read-only")
+eq(type(message), "string", "confirmation message")
+eq(ns.DebugCommand("unknown"), false, "unknown debug subcommand")
+C_AuctionHouse = nil
+eq(ns.DebugCommand("api"), false, "missing API handled")
+C_AuctionHouse = {}
+eq(ns.DebugCommand("api"), true, "empty API supported")
+eq(ns.db.apiDiagnostics.count, 0, "empty API replaces old snapshot")
 print("PASS: " .. checks .. " assertions")

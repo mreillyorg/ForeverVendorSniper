@@ -1,10 +1,11 @@
-## Interface: 11601
+## Interface: 16001
 ## Title: ForeverVendorSniper
 ## Notes: Find auction buyouts below NPC vendor value on WoW Forever.
 ## Author: Michael Reilly
 ## Version: 0.1.0-alpha
 ## SavedVariables: ForeverVendorSniperDB
 Core.lua
+Diagnostics.lua
 Themes.lua
 ThemeEditor.lua
 Opportunities.lua

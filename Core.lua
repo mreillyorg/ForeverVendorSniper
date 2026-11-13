@@ -45,7 +45,12 @@ if type(CreateFrame) == "function" then
     end)
     SLASH_FOREVERVENDORSNIPER1 = "/fvs"
     SlashCmdList.FOREVERVENDORSNIPER = function(command)
-        if string.sub(command, 1, 6) == "theme " and ns.ThemeCommand then
+        if string.sub(command, 1, 6) == "debug " and ns.DebugCommand then
+            local ok, message = ns.DebugCommand(string.sub(command, 7))
+            if DEFAULT_CHAT_FRAME then
+                DEFAULT_CHAT_FRAME:AddMessage("FVS: " .. (message or (ok and "Diagnostic captured" or "Diagnostic failed")))
+            end
+        elseif string.sub(command, 1, 6) == "theme " and ns.ThemeCommand then
             local ok, message = ns.ThemeCommand(string.sub(command, 7))
             if DEFAULT_CHAT_FRAME then
                 DEFAULT_CHAT_FRAME:AddMessage("FVS: " .. (message or (ok and "Theme updated" or "Invalid theme command")))
