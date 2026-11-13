@@ -35,3 +35,24 @@ Custom themes persist in SavedVariables. A graphical color picker remains planne
 
 ## Scanner notes
 The native scanner currently requires clicking **Next Page** between pages, honors query cooldowns and does not purchase auctions. Auctionator and TSM are detected but are not yet integrated as live listing providers. Forever AH API verification is still required.
+
+## Windows local development tools
+
+The PowerShell helpers in `tools/` are adapted from ForeverWindowMover's development workflow.
+The `.pkgmeta` ignore list controls which root-level files are copied, matching the
+BigWigs release packaging exclusions. They do not include `.git`, tests or tools.
+
+```powershell
+.\tools\build.ps1 -Check
+.\tools\build.ps1
+.\tools\Sync-ToAddOns.ps1 -WhatIf
+.\tools\Sync-ToAddOns.ps1 -AddOnsPath 'C:\Games\WoW\Interface\AddOns'
+.\tools\Sync-ToAddOns.ps1 -Watch -SkipBuild
+.\tools\Sync-ToAddOns.ps1 -Remove -AddOnsPath 'C:\Games\WoW\Interface\AddOns'
+```
+
+Set `$env:WOW_ADDONS_PATH` to your `Interface\AddOns` directory for automatic
+selection. When multiple installations are detected, specify `-AddOnsPath`.
+The sync tool refuses to modify any target outside an `AddOns\ForeverVendorSniper`
+folder, and it rejects junctions/symlinks at that target. `-WhatIf` previews changes.
+The watcher runs until Ctrl+C; Lua changes require `/reload` in game.
