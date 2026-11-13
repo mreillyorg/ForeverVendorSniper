@@ -1,4 +1,4 @@
-local ns = _G.ForeverVendorSniper
+local ns = ForeverVendorSniper
 function ns.CalculateOpportunity(listing, minProfit, minDiscount)
     if type(listing) ~= "table" then return nil end
     local count, unit = listing.count, listing.vendorUnit

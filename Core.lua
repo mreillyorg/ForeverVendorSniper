@@ -1,9 +1,12 @@
 local addonName, ns = ...
 ns = ns or {}
-_G.ForeverVendorSniper = ns
+ForeverVendorSniper = ns
 ns.name = addonName or "ForeverVendorSniper"
 ns.version = "0.1.0-alpha"
-ns.defaults = { theme = "Blizzard", customThemes = {}, minProfit = 100, minDiscount = 0, autoOpen = true, point = { "CENTER", "UIParent", "CENTER", 260, 0 } }
+ns.defaults = {
+    theme = "Blizzard", customThemes = {}, minProfit = 100, minDiscount = 0,
+    autoOpen = true, point = { "CENTER", "UIParent", "CENTER", 260, 0 },
+}
 
 local function mergeDefaults(target, defaults)
     for k, v in pairs(defaults) do
@@ -19,9 +22,9 @@ local function mergeDefaults(target, defaults)
 end
 ns.MergeDefaults = mergeDefaults
 function ns.Initialize()
-    if type(_G.ForeverVendorSniperDB) ~= "table" then _G.ForeverVendorSniperDB = {} end
-    mergeDefaults(_G.ForeverVendorSniperDB, ns.defaults)
-    ns.db = _G.ForeverVendorSniperDB
+    if type(ForeverVendorSniperDB) ~= "table" then ForeverVendorSniperDB = {} end
+    mergeDefaults(ForeverVendorSniperDB, ns.defaults)
+    ns.db = ForeverVendorSniperDB
     if ns.BuildUI then ns.BuildUI() end
 end
 if type(CreateFrame) == "function" then
@@ -44,7 +47,9 @@ if type(CreateFrame) == "function" then
     SlashCmdList.FOREVERVENDORSNIPER = function(command)
         if string.sub(command, 1, 6) == "theme " and ns.ThemeCommand then
             local ok, message = ns.ThemeCommand(string.sub(command, 7))
-            if DEFAULT_CHAT_FRAME then DEFAULT_CHAT_FRAME:AddMessage("FVS: " .. (message or (ok and "Theme updated" or "Invalid theme command"))) end
+            if DEFAULT_CHAT_FRAME then
+                DEFAULT_CHAT_FRAME:AddMessage("FVS: " .. (message or (ok and "Theme updated" or "Invalid theme command")))
+            end
         elseif command == "scan" and ns.StartScan then ns.StartScan()
         elseif ns.ToggleUI then ns.ToggleUI() end
     end

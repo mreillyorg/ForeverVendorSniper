@@ -1,4 +1,4 @@
-local ns = _G.ForeverVendorSniper
+local ns = ForeverVendorSniper
 ns.results = {}
 ns.scan = { active = false, pending = false, page = 0, scanned = 0 }
 local PAGE_SIZE = 50

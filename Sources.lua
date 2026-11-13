@@ -1,4 +1,4 @@
-local ns = _G.ForeverVendorSniper
+local ns = ForeverVendorSniper
 -- External pricing addons may expose historical prices, not live auction indices.
 -- Never use their cached prices to authorize a purchase.
 function ns.DetectSources()

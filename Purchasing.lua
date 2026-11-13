@@ -1,4 +1,4 @@
-local ns = _G.ForeverVendorSniper
+local ns = ForeverVendorSniper
 -- Deliberately fail closed: stale scan indices cannot be safely purchased.
 function ns.ValidatePurchase(row, current)
     if not row or not current or row.page ~= current.page or row.index ~= current.index then return false, "Listing changed" end
@@ -6,7 +6,7 @@ function ns.ValidatePurchase(row, current)
     if type(row.buyout) ~= "number" or row.buyout <= 0 then return false, "No buyout" end
     return true
 end
-function ns.RequestBuyout(row)
+function ns.RequestBuyout()
     if not ns.auctionOpen then return false, "Auction House closed" end
     -- The server's live purchase/commodity protocol has not yet been verified.
     -- Never invoke PlaceAuctionBid with an index captured during a previous scan.

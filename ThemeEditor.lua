@@ -1,4 +1,4 @@
-local ns = _G.ForeverVendorSniper
+local ns = ForeverVendorSniper
 -- In-game custom theme editing through /fvs theme commands.
 -- Uses WoW's existing chat command input; no external UI dependencies.
 local keys = { background = true, panel = true, accent = true, text = true, profit = true }

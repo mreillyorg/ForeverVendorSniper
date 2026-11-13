@@ -1,8 +1,12 @@
 std = "lua51"
 max_line_length = 140
-read_globals = {
-  "_G", "CreateFrame", "UIParent", "GetItemInfo", "GetNumAuctionItems",
-  "GetAuctionItemInfo", "GetAuctionItemLink", "QueryAuctionItems",
-  "CanSendAuctionQuery", "IsAddOnLoaded", "SlashCmdList", "DEFAULT_CHAT_FRAME",
+-- Addon-owned namespace and SavedVariables are intentionally mutable.
+globals = {
+  "ForeverVendorSniper", "ForeverVendorSniperDB",
+  "SLASH_FOREVERVENDORSNIPER1", "SlashCmdList",
 }
-globals = { "SLASH_FOREVERVENDORSNIPER1" }
+-- WoW functions are normally read-only; test mocks override them.
+read_globals = {
+  "_G", "CreateFrame", "UIParent", "GetItemInfo", "IsAddOnLoaded",
+  "DEFAULT_CHAT_FRAME",
+}

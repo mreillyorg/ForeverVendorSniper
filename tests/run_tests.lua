@@ -1,16 +1,17 @@
+-- luacheck: globals QueryAuctionItems CanSendAuctionQuery GetNumAuctionItems GetAuctionItemInfo GetAuctionItemLink
 local checks = 0
 local function eq(actual, expected, label)
     checks = checks + 1
     if actual ~= expected then error((label or "assertion") .. ": expected " .. tostring(expected) .. ", got " .. tostring(actual)) end
 end
-_G.ForeverVendorSniper = { db = { customThemes = {}, minProfit = 100, minDiscount = 0 } }
+ForeverVendorSniper = { db = { customThemes = {}, minProfit = 100, minDiscount = 0 } }
 dofile("Themes.lua")
 dofile("Opportunities.lua")
 dofile("Sources.lua")
 dofile("VendorPrices.lua")
 dofile("Purchasing.lua")
 dofile("Options.lua")
-local ns = _G.ForeverVendorSniper
+local ns = ForeverVendorSniper
 local row = ns.CalculateOpportunity({ name = "Sword", count = 2, vendorUnit = 1000, buyout = 1500 }, 100, 0)
 eq(row.profit, 500, "profit")
 eq(row.vendorTotal, 2000, "stack vendor")

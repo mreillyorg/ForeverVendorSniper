@@ -1,4 +1,4 @@
-local ns = _G.ForeverVendorSniper
+local ns = ForeverVendorSniper
 function ns.SetMinimumProfit(copper)
     if type(copper) ~= "number" or copper < 0 then return false end
     ns.db.minProfit = math.floor(copper)

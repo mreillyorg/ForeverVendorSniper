@@ -1,4 +1,4 @@
-local ns = _G.ForeverVendorSniper
+local ns = ForeverVendorSniper
 local frame, rows, status, offset
 rows = {}
 offset = 0
@@ -55,7 +55,7 @@ function ns.BuildUI()
     frame.bg = frame:CreateTexture(nil, "BACKGROUND")
     frame.bg:SetAllPoints()
     frame.bg:SetColorTexture(0.1, 0.1, 0.1, 0.96)
-    frame.title = text(frame, 14, 12, -12, 380, "ForeverVendorSniper  v" .. ns.version)
+    frame.title = text(frame, 12, -12, 380, "ForeverVendorSniper  v" .. ns.version)
     button(frame, "X", 650, -7, 30, function() frame:Hide() end)
     button(frame, "Scan", 12, -40, 80, function() offset = 0 ns.StartScan() end)
     button(frame, "Next Page", 98, -40, 100, function() ns.NextPage() end)
@@ -63,23 +63,23 @@ function ns.BuildUI()
     button(frame, "Theme", 280, -40, 80, function() ns.CycleTheme() end)
     button(frame, "Up", 580, -40, 45, function() offset = math.max(0, offset - 7) ns.RefreshUI() end)
     button(frame, "Down", 630, -40, 50, function() offset = math.min(math.max(0, #ns.results - 7), offset + 7) ns.RefreshUI() end)
-    text(frame, 11, 12, -76, 220, "Item / Count")
-    text(frame, 11, 245, -76, 105, "Buyout")
-    text(frame, 11, 360, -76, 105, "Vendor")
-    text(frame, 11, 475, -76, 105, "Profit")
+    text(frame, 12, -76, 220, "Item / Count")
+    text(frame, 245, -76, 105, "Buyout")
+    text(frame, 360, -76, 105, "Vendor")
+    text(frame, 475, -76, 105, "Profit")
     for i = 1, 7 do
         local container = CreateFrame("Frame", nil, frame)
         container:SetPoint("TOPLEFT", frame, "TOPLEFT", 0, -82 - i * 30)
         container:SetSize(690, 28)
         local r = { container = container }
-        r.name = text(container, 11, 12, 0, 230)
-        r.buy = text(container, 11, 245, 0, 105)
-        r.vendor = text(container, 11, 360, 0, 105)
-        r.profit = text(container, 11, 475, 0, 100)
+        r.name = text(container, 12, 0, 230)
+        r.buy = text(container, 245, 0, 105)
+        r.vendor = text(container, 360, 0, 105)
+        r.profit = text(container, 475, 0, 100)
         r.button = button(container, "Verify", 580, 3, 100, function() end)
         rows[i] = r
     end
-    status = text(frame, 11, 12, -331, 660, "Ready")
+    status = text(frame, 12, -331, 660, "Ready")
     ns.ApplyTheme(frame)
     frame:Hide()
 end

@@ -1,4 +1,4 @@
-local ns = _G.ForeverVendorSniper
+local ns = ForeverVendorSniper
 ns.vendorCache = {}
 function ns.GetVendorUnit(itemLink)
     if not itemLink or type(GetItemInfo) ~= "function" then return nil end

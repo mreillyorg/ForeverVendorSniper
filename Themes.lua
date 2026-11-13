@@ -1,4 +1,4 @@
-local ns = _G.ForeverVendorSniper
+local ns = ForeverVendorSniper
 ns.themes = {
     Blizzard = { background = "292016", panel = "382B1D", accent = "D4AC62", text = "F4E6CB", profit = "62CE71" },
     Dark = { background = "141820", panel = "242B36", accent = "659ED6", text = "E4EAF3", profit = "62CEAA" },
@@ -15,7 +15,10 @@ function ns.GetTheme(name)
     return (custom and custom[name]) or ns.themes[name] or ns.themes.Blizzard
 end
 function ns.SaveCustomTheme(name, colors)
-    if type(name) ~= "string" or not string.match(name, "%S") or ns.themes[name] or type(colors) ~= "table" or not ns.db then return false end
+    if type(name) ~= "string" or not string.match(name, "%S") or ns.themes[name]
+        or type(colors) ~= "table" or not ns.db then
+        return false
+    end
     local theme = {}
     for key, fallback in pairs(ns.themes.Blizzard) do
         theme[key] = ns.ValidHex(colors[key]) and string.gsub(colors[key], "#", "") or fallback
