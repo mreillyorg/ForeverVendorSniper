@@ -2,7 +2,7 @@ local ns = ForeverVendorSniper
 local frame, rows, status, offset
 rows = {}
 offset = 0
-local function text(parent, size, x, y, width, value)
+local function text(parent, x, y, width, value)
     local fs = parent:CreateFontString(nil, "OVERLAY", "GameFontNormalSmall")
     fs:SetPoint("TOPLEFT", parent, "TOPLEFT", x, y)
     fs:SetWidth(width)
