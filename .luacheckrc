@@ -4,6 +4,9 @@ max_line_length = 140
 globals = {
   "ForeverVendorSniper", "ForeverVendorSniperDB",
   "SLASH_FOREVERVENDORSNIPER1", "SlashCmdList",
+  -- The unit-test harness replaces these WoW AH API functions with mocks.
+  "CanSendAuctionQuery", "QueryAuctionItems",
+  "GetNumAuctionItems", "GetAuctionItemInfo", "GetAuctionItemLink",
 }
 -- WoW functions are normally read-only; test mocks override them.
 read_globals = {
